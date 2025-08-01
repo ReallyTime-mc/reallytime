@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReallyTime</title>
+  <link rel="icon" href="images/photo_2025-07-31_14-09-20.jpg.jpg" type="image/jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="#" onclick="showSection('home')">Главная</a>
+  <a href="#" onclick="showSection('privileges')">Привилегии</a>
+  <a href="#" onclick="showSection('cases')">Кейсы</a>
+  <a href="#" onclick="showSection('other')">Прочие</a>
+  <a href="#" onclick="showSection('help')">Помощь</a>
+</nav>
+
+<div id="home" class="section active">
+  <h1>Добро пожаловать в магазин</h1>
+  <p>Выберите категорию выше, чтобы просмотреть доступные предложения.</p>
+</div>
+
+<div id="privileges" class="section">
+  <h1>Привилегии</h1>
+  <div class="shop-container">
+    <div id="privilege-list">
+      <button class="privilege-box" data-id="1">Hero</button>
+      <button class="privilege-box" data-id="2">Dragon</button>
+      <button class="privilege-box" data-id="3">Master</button>
+      <button class="privilege-box" data-id="4">Dracula</button>
+      <button class="privilege-box" data-id="5">Vip</button>
+      <button class="privilege-box" data-id="6">Vip+</button>
+      <button class="privilege-box" data-id="7">Plus</button>
+      <button class="privilege-box" data-id="8">Plus+</button>
+    </div>
+    <div id="privilege-info">
+      <h2 id="priv-title">Выберите привилегию слева</h2>
+      <p id="priv-description">Здесь появится описание выбранной привилегии.</p>
+      <a id="priv-link" href="#" class="buy-button" style="display: none;">Купить</a>
+    </div>
+  </div>
+</div>
+
+<div id="other" class="section">
+  <h1>Прочие</h1>
+  <div class="shop-container">
+    <div class="card">
+      <h2>Разблокировка на ваш Аккаунт</h2>
+      <div class="info">
+        <p>❤Разбан на ваш Аккаунт❤</p>
+        <a href="https://funpay.com/lots/offer?id=47533562" class="buy-button">Купить</a>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Рубли</h2>
+      <div class="info">
+        <p>💖 цена за 100 Рублей(валюта сервера)💖</p>
+        <a href="https://funpay.com/lots/offer?id=47745212" class="buy-button">Купить</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cases" class="section">
+  <h1>Кейсы</h1>
+  <div class="shop-container">
+    <div class="card">
+      <h2>Донат кейс</h2>
+      <div class="info">
+        <p>Кайс с привилегиями</p>
+        <a href="https://funpay.com/lots/offer?id=47533488" class="buy-button">Купить</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="help" class="section">
+  <h1>Помощь</h1>
+  <button id="discord-button" onclick="window.open('https://discord.gg/rWGu74nn', '_blank')">Discord</button>
+  <p>Если у вас возникли вопросы, обращайтесь в наш Discord.</p>
+</div>
+
+<script>
+  const privileges = {
+    1: { title: "Hero", description: "⚕ /kits Hero ...", link: "https://funpay.com/lots/offer?id=47528745" },
+    2: { title: "Dragon", description: "⚕ /kits Dragon ...", link: "https://funpay.com/lots/offer?id=47530269" },
+    3: { title: "Master", description: "⚕ /kits Master ...", link: "https://funpay.com/lots/offer?id=47530533" },
+    4: { title: "Dracula", description: "⚕ /kits Dracula ...", link: "https://funpay.com/lots/offer?id=47530844" },
+    5: { title: "Vip", description: "⚕ /kits Vip ...", link: "https://funpay.com/lots/offer?id=47531433" },
+    6: { title: "Vip+", description: "⚕ /kits Vip+ ...", link: "https://funpay.com/lots/offer?id=47531595" },
+    7: { title: "Plus", description: "⚕ /kits Plus ...", link: "https://funpay.com/lots/offer?id=47531778" },
+    8: { title: "Plus+", description: "⚕ /kits Plus+ ...", link: "https://funpay.com/lots/offer?id=47532532" }
+  };
+
+  const buttons = document.querySelectorAll('.privilege-box');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      const data = privileges[id];
+      document.getElementById("priv-title").textContent = data.title;
+      document.getElementById("priv-description").innerHTML = data.description;
+      const link = document.getElementById("priv-link");
+      link.href = data.link;
+      link.style.display = "inline-block";
+    });
+  });
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
