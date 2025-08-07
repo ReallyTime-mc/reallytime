@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReallyTime Shop</title>
+  <link rel="icon" href="imeges/servericon1.jpg" type="image/jpg">
+</head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-image: url('imeges/photo_2025-08-05_14-07-26.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(20, 40, 70, 0.95);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 12px 0;
+      z-index: 1000;
+      border-bottom: 1px solid #0076c5;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      background-color: #264d73;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('images/photo_2025-08-05_14-07-26.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #00b4d8;
+      opacity: 0.2;
+      z-index: 1;
+    }
+
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background: #00b4d8;
+      color: #000;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero button:hover {
+      background: #48cae4;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    section {
+      padding: 80px 20px;
+      background-color: rgb(27, 40, 53);
+      min-height: 100vh;
+      transition: opacity 0.5s ease;
+    }
+
+    section.hidden {
+      display: none !important;
+    }
+
+    section h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+    }
+
+    .privilege-grid, .grid-2, .grid-3 {
+      display: grid;
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .privilege-grid {
+      grid-template-columns: repeat(4, minmax(250px, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 5px;
+    }
+    .kit-card {
+      background-color: rgb(31, 46, 61);
+      border-radius: 20px;
+      width: 300%;
+      max-width: 1000px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .kit-card:hover {
+      transform: scale(1.03);
+    }
+
+    .kit-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .kit-card h2 {
+      color: #33ccff;
+      margin: 10px 0;
+    }
+
+    .priv-card {
+      background-color: rgb(31, 46, 61);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 300px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .priv-card:hover {
+      transform: scale(1.03);
+    }
+
+    .priv-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 30px;
+      margin-bottom: 30px;
+    }
+
+    .priv-card h2 {
+      color: #33ccff;
+      margin: 10px 0;
+    }
+
+    .buy-button {
+      background-color: #3399ff;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .buy-button:hover {
+      background-color: #0076c5;
+    }
+
+    @media (max-width: 900px) {
+      .privilege-grid, .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    /* RAIN EFFECT */
+    .rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .raindrop {
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 15px;
+      background: rgba(20, 37, 187, 0.4);
+      animation: drop linear infinite;
+    }
+
+    @keyframes drop {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="rain" id="rain"></div>
+
+  <nav>
+    <a href="#" id="goHome">Главная страница</a>
+    <a href="https://discord.gg/tdJx9vSj" target="_blank">Помощь</a>
+    <a href="https://telegra.ph/ReallyTime-Oferta-08-01" target="_blank">Оферта</a>
+    <a href="#" id="goToProducts">Товары</a>
+  </nav>
+
+  <div class="hero" id="heroSection">
+    <div class="content">
+      <h1>Добро пожаловать в ReallyTime</h1>
+      <button id="goToProductsBtn">Перейти к товарам</button>
+    </div>
+  </div>
+
+  <!-- Привилегии -->
+  <section id="privileges" class="hidden">
+     <h1>Привилегии</h1>
+    <div class="privilege-grid">
+      <div class="priv-card">
+        <h2>Hero</h2>
+        <img src="imeges/hero.jpg" alt="Hero">
+        <div class="price-row">
+  <span class="price">33₽</span>
+  <a href="https://funpay.com/lots/offer?id=47528745" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Dragon</h2>
+        <img src="imeges/dragon.png" alt="Dragon">
+       <div class="price-row">
+  <span class="price">67₽</span>
+  <a href="https://funpay.com/lots/offer?id=47530269" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Master</h2>
+        <img src="imeges/Master.jpg" alt="Master">
+       <div class="price-row">
+  <span class="price">90₽</span>
+  <a href="https://funpay.com/lots/offer?id=47530533" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Dracula</h2>
+        <img src="imeges/Dracula.jpg" alt="Lord">
+        <div class="price-row">
+  <span class="price">136₽</span>
+  <a href="https://funpay.com/lots/offer?id=47530844" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Vip</h2>
+        <img src="imeges/Vip.jpg" alt="Legend">
+        <div class="price-row">
+  <span class="price">275₽</span>
+  <a href="https://funpay.com/lots/offer?id=47531433" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Vip+</h2>
+        <img src="imeges/Vip+.jpg" alt="Titan">
+       <div class="price-row">
+  <span class="price">344₽</span>
+  <a href="https://funpay.com/lots/offer?id=47531595" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Plus</h2>
+        <img src="imeges/Plus.jpg" alt="Overlord">
+        <div class="price-row">
+  <span class="price">413₽</span>
+  <a href="https://funpay.com/lots/offer?id=47531778" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="priv-card">
+        <h2>Plus+</h2>
+        <img src="imeges/Plus+.jpg" alt="God">
+        <div class="price-row">
+  <span class="price">528₽</span>
+  <a href="https://funpay.com/lots/offer?id=47532532" class="buy-button">Купить</a>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Другое -->
+  <section id="other" class="hidden">
+     <h1>Другое</h1>
+  <div class="grid-2">
+    <div class="priv-card">
+      <h2>Валюта</h2>
+      <img src="imeges/money.jpg" alt="Money">
+      <div class="price-row">
+  <span class="price">2₽ за 100шт.</span>
+  <a href="https://funpay.com/lots/offer?id=47745212" class="buy-button">Купить</a>
+</div>
+
+    </div>
+    <div class="priv-card">
+      <h2>Донат Кейс</h2>
+      <img src="imeges/key.jpg" alt="Donate case">
+      <div class="price-row">
+  <span class="price">139₽</span>
+  <a href="https://funpay.com/lots/offer?id=47533488" class="buy-button">Купить</a>
+</div>
+
+    </div>
+    <div class="priv-card">
+      <h2>Разбан</h2>
+      <img src="imeges/rasban.jpg" alt="unban">
+      <div class="price-row">
+  <span class="price">255₽</span>
+  <a href="https://funpay.com/lots/offer?id=47533562" class="buy-button">Купить</a>
+</div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Наборы -->
+  <section id="packs" class="hidden">
+    <h1>Наборы</h1>
+    <div class="grid-3">
+      <div class="kit-card">
+        <h2>Набор пвп</h2>
+        <img src="imeges/kit1.jpg" alt="Pack 1">
+        <div class="price-row">
+  <span class="price">68₽</span>
+  <a href="https://funpay.com/lots/offer?id=48437599" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="kit-card">
+        <h2>Набор пвп+</h2>
+        <img src="imeges/kit2.jpg" alt="Pack 2">
+      <div class="price-row">
+  <span class="price">138₽</span>
+  <a href="https://funpay.com/lots/offer?id=48437657" class="buy-button">Купить</a>
+</div>
+
+      </div>
+      <div class="kit-card">
+        <h2>Набор пвп++</h2>
+        <img src="imeges/kit3.jpg" alt="Pack 3">
+       <div class="price-row">
+  <span class="price">192₽</span>
+  <a href="https://funpay.com/lots/offer?id=48437692" class="buy-button">Купить</a>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Дождик
+    const rain = document.getElementById('rain');
+    for (let i = 0; i < 100; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'raindrop';
+      drop.style.left = `${Math.random() * 100}vw`;
+      drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+      drop.style.animationDelay = `${Math.random() * 5}s`;
+      drop.style.height = `${Math.random() * 15 + 10}px`;
+      rain.appendChild(drop);
+    }
+
+    const hero = document.getElementById('heroSection');
+    const sections = ['privileges', 'other', 'packs'].map(id => document.getElementById(id));
+
+    // Функция показать товары, скрыть hero
+    function showProducts() {
+      hero.style.opacity = 0;
+      setTimeout(() => {
+        hero.style.display = 'none';
+        sections.forEach(section => section.classList.remove('hidden'));
+        sections[0].scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+
+    // Функция показать hero, скрыть товары
+    function showHero() {
+      sections.forEach(section => section.classList.add('hidden'));
+      hero.style.display = 'flex';
+      setTimeout(() => {
+        hero.style.opacity = 1;
+        hero.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+
+    document.getElementById('goToProductsBtn').addEventListener('click', showProducts);
+    document.getElementById('goToProducts').addEventListener('click', e => {
+      e.preventDefault();
+      showProducts();
+    });
+
+    document.getElementById('goHome').addEventListener('click', e => {
+      e.preventDefault();
+      showHero();
+    });
+  </script>
+</body>
+</html>
