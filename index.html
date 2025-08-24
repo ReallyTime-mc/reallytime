@@ -109,7 +109,7 @@
 
     section {
       padding: 80px 20px;
-      background-color: rgb(27, 40, 53);
+      background-color: rgb(40, 115, 177);
       min-height: 100vh;
       transition: opacity 0.5s ease;
     }
@@ -124,7 +124,7 @@
       font-size: 36px;
     }
 
-    .privilege-grid, .grid-2, .grid-3 {
+    .privilege-grid, .grid-2, .grid-3, .grid-sver {
       display: grid;
       gap: 30px;
       justify-items: center;
@@ -135,15 +135,18 @@
     }
 
     .grid-2 {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, minmax(250px, 1fr));
     }
 
     .grid-3 {
       grid-template-columns: repeat(1, 1fr);
       gap: 5px;
     }
+    .grid-sver {
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
     .kit-card {
-      background-color: rgb(31, 46, 61);
+      background-color: rgba(51, 28, 255, 0.295);
       border-radius: 20px;
       width: 300%;
       max-width: 1000px;
@@ -166,12 +169,12 @@
     }
 
     .kit-card h2 {
-      color: #33ccff;
+      color: #ffffff;
       margin: 10px 0;
     }
 
     .priv-card {
-      background-color: rgb(31, 46, 61);
+      background-color: rgba(51, 28, 255, 0.295);
       border-radius: 20px;
       width: 100%;
       max-width: 300px;
@@ -194,9 +197,48 @@
     }
 
     .priv-card h2 {
-      color: #33ccff;
+      color: #ffffff;
       margin: 10px 0;
     }
+
+    .other-card {
+      background-color: rgba(51, 28, 255, 0.295);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 300px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .other-card:hover {
+      transform: scale(1.03);
+    }
+
+    .other-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 30px;
+      margin-bottom: 30px;
+    }
+
+    .other-card h2 {
+      color: #ffffff;
+      margin: 10px 0;
+    }
+    .first-card {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.first-card .priv-card {
+  width: auto;       /* убираем ширину в 100% */
+  max-width: 300px;  /* ограничиваем ширину */
+}
+
 
     .buy-button {
       background-color: #3399ff;
@@ -257,6 +299,24 @@
         transform: translateY(100vh);
       }
     }
+    .hidden { display: none !important; }
+
+/* Затемнённый фон с размытием */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(206, 184, 255, 0.5); 
+  backdrop-filter: blur(8px);
+  z-index: 1500; /* ниже модалок, выше контента */
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#overlay.active {
+  display: block !important;
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -264,7 +324,7 @@
 
   <nav>
     <a href="#" id="goHome">Главная страница</a>
-    <a href="https://discord.gg/SY4u29RPAy" target="_blank">Помощь</a>
+    <a href="https://discord.gg/tdJx9vSj" target="_blank">Помощь</a>
     <a href="https://telegra.ph/ReallyTime-Oferta-08-01" target="_blank">Оферта</a>
     <a href="#" id="goToProducts">Товары</a>
   </nav>
@@ -276,119 +336,210 @@
     </div>
   </div>
 
-  <!-- Привилегии -->
-  <section id="privileges" class="hidden">
-     <h1>Привилегии</h1>
-    <div class="privilege-grid">
-      <div class="priv-card">
-        <h2>Hero</h2>
-        <img src="imeges/hero.jpg" alt="Hero">
-        <div class="price-row">
-  <span class="price">33₽</span>
-  <a href="https://funpay.com/lots/offer?id=47528745" class="buy-button">Купить</a>
-</div>
+<!-- Привилегии -->
+<section id="privileges" class="hidden">
+  <h1>Привилегии</h1>
 
-      </div>
-      <div class="priv-card">
-        <h2>Dragon</h2>
-        <img src="imeges/Dragon.png" alt="Dragon">
-       <div class="price-row">
-  <span class="price">67₽</span>
-  <a href="https://funpay.com/lots/offer?id=47530269" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Master</h2>
-        <img src="imeges/Master.jpg" alt="Master">
-       <div class="price-row">
-  <span class="price">90₽</span>
-  <a href="https://funpay.com/lots/offer?id=47530533" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Dracula</h2>
-        <img src="imeges/Dracula.jpg" alt="Lord">
-        <div class="price-row">
-  <span class="price">136₽</span>
-  <a href="https://funpay.com/lots/offer?id=47530844" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Vip</h2>
-        <img src="imeges/Vip.jpg" alt="Legend">
-        <div class="price-row">
-  <span class="price">275₽</span>
-  <a href="https://funpay.com/lots/offer?id=47531433" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Vip+</h2>
-        <img src="imeges/Vip+.jpg" alt="Titan">
-       <div class="price-row">
-  <span class="price">344₽</span>
-  <a href="https://funpay.com/lots/offer?id=47531595" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Plus</h2>
-        <img src="imeges/Plus.jpg" alt="Overlord">
-        <div class="price-row">
-  <span class="price">413₽</span>
-  <a href="https://funpay.com/lots/offer?id=47531778" class="buy-button">Купить</a>
-</div>
-
-      </div>
-      <div class="priv-card">
-        <h2>Plus+</h2>
-        <img src="imeges/Plus+.jpg" alt="God">
-        <div class="price-row">
-  <span class="price">528₽</span>
-  <a href="https://funpay.com/lots/offer?id=47532532" class="buy-button">Купить</a>
-</div>
-
+  <!-- Первая карточка отдельно -->
+  <div class="first-card">
+    <div class="priv-card" data-name="Custom" 
+         data-link-30="https://funpay.com/lots/offer?id=49754187"
+         data-link-90="https://funpay.com/lots/offer?id=49754235"
+         data-link-forever="https://funpay.com/lots/offer?id=49754343">
+      <h2>Custom</h2>
+      <img src="imeges/Custom.jpg" alt="Custom">
+      <div class="price-row">
+        <span class="price">1199₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
       </div>
     </div>
-  </section>
+  </div>
 
+  <!-- Остальные карточки -->
+  <div class="privilege-grid">
+    <div class="priv-card" data-name="Hero" 
+         data-link-30="https://funpay.com/lots/offer?id=48746626"
+         data-link-90="https://funpay.com/lots/offer?id=49157616"
+         data-link-forever="https://funpay.com/lots/offer?id=47528745">
+      <h2>Hero</h2>
+      <img src="imeges/hero.jpg" alt="Hero">
+      <div class="price-row">
+        <span class="price">46₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Dragon" 
+         data-link-30="https://funpay.com/lots/offer?id=48746807"
+         data-link-90="https://funpay.com/lots/offer?id=49157358"
+         data-link-forever="https://funpay.com/lots/offer?id=47530269">
+      <h2>Dragon</h2>
+      <img src="imeges/dragon.png" alt="Dragon">
+      <div class="price-row">
+        <span class="price">92₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Master" 
+         data-link-30="https://funpay.com/lots/offer?id=48747038"
+         data-link-90="https://funpay.com/lots/offer?id=49157192"
+         data-link-forever="https://funpay.com/lots/offer?id=47530533">
+      <h2>Master</h2>
+      <img src="imeges/Master.jpg" alt="Master">
+      <div class="price-row">
+        <span class="price">190₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Dracula" 
+         data-link-30="https://funpay.com/lots/offer?id=48747291"
+         data-link-90="https://funpay.com/lots/offer?id=49157015"
+         data-link-forever="https://funpay.com/lots/offer?id=47530844">
+      <h2>Dracula</h2>
+      <img src="imeges/Dracula.jpg" alt="Dracula">
+      <div class="price-row">
+        <span class="price">236₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Overlord" 
+         data-link-30="https://funpay.com/lots/offer?id=48747603"
+         data-link-90="https://funpay.com/lots/offer?id=48796314"
+         data-link-forever="https://funpay.com/lots/offer?id=47531433">
+      <h2>Overlord</h2>
+      <img src="imeges/Plus+.jpg" alt="Overlord">
+      <div class="price-row">
+        <span class="price">375₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Guardian" 
+         data-link-30="https://funpay.com/lots/offer?id=48747743"
+         data-link-90="https://funpay.com/lots/offer?id=48796174"
+         data-link-forever="https://funpay.com/lots/offer?id=47531595">
+      <h2>Guardian</h2>
+      <img src="imeges/Vip+.jpg" alt="Guardian">
+      <div class="price-row">
+        <span class="price">444₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Phantom" 
+         data-link-30="https://funpay.com/lots/offer?id=48747924"
+         data-link-90="https://funpay.com/lots/offer?id=48749062"
+         data-link-forever="https://funpay.com/lots/offer?id=47531778">
+      <h2>Phantom</h2>
+      <img src="imeges/Plus.jpg" alt="Phantom">
+      <div class="price-row">
+        <span class="price">613₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+
+    <div class="priv-card" data-name="Sakura" 
+         data-link-30="https://funpay.com/lots/offer?id=48748112"
+         data-link-90="https://funpay.com/lots/offer?id=48748955"
+         data-link-forever="https://funpay.com/lots/offer?id=47532532">
+      <h2>Sakura</h2>
+      <img src="imeges/Vip.jpg" alt="Sakura">
+      <div class="price-row">
+        <span class="price">928₽</span>
+        <button class="buy-button" onclick="openModal(this)">Купить</button>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Другое -->
   <section id="other" class="hidden">
      <h1>Другое</h1>
   <div class="grid-2">
-    <div class="priv-card">
+    <div class="other-card"
+    data-desc="Игровая валюта. 100 штук стоит 2₽. Можно использовать для покупки внутриигровых предметов."
+    data-link="https://funpay.com/lots/offer?id=47745212">
       <h2>Валюта</h2>
       <img src="imeges/money.jpg" alt="Money">
       <div class="price-row">
   <span class="price">2₽ за 100шт.</span>
-  <a href="https://funpay.com/lots/offer?id=47745212" class="buy-button">Купить</a>
+  <button class="buy-button">Купить</button>
 </div>
-
     </div>
-    <div class="priv-card">
+    <div class="other-card"
+    data-desc="Донат Кейс">
       <h2>Донат Кейс</h2>
       <img src="imeges/key.jpg" alt="Donate case">
       <div class="price-row">
   <span class="price">139₽</span>
-  <a href="https://funpay.com/lots/offer?id=47533488" class="buy-button">Купить</a>
+  <button class="buy-button">Купить</button>
 </div>
-
     </div>
-    <div class="priv-card">
+    <div class="other-card"
+    data-desc="Разбан на ваш Аккаунт"
+    data-link="https://funpay.com/lots/offer?id=47533562">
       <h2>Разбан</h2>
       <img src="imeges/rasban.jpg" alt="unban">
       <div class="price-row">
   <span class="price">255₽</span>
-  <a href="https://funpay.com/lots/offer?id=47533562" class="buy-button">Купить</a>
+  <button class="buy-button">Купить</button>
+</div>
+ </div>
+  <div class="other-card"
+  data-desc="После покупки товара обратитесь в техническую поддержку: https://discord.gg/tdJx9vSj
+Обратите внимание, что если вы не сможете подтвердить принадлежность аккаунта, то средства возвращены не будут"
+   data-link="https://funpay.com/lots/offer?id=49755412">
+      <h2>Восстановление аккаунта</h2>
+      <img src="imeges/Hekp.jpg" alt="Help">
+      <div class="price-row"> 
+  <span class="price">179</span>
+  <button class="buy-button">Купить</button>
+</div>
+  </div>
+</section>
+
+
+
+
+
+
+<section id="Items" class="hidden">
+     <h1>Придметы</h1>
+  <div class="grid-sver">
+    <div class="other-card"
+     data-desc="🌕🌕🌕Шар Покоя🌕🌕🌕
+При применении во второй руке:
+Даёт эффект Сила 2
+Даёт эффект Скорость 2
+Даёт эффект Огнестойкость 1
+Даёт эффект Прилив здоровья 2"
+    data-link="https://funpay.com/lots/offer?id=49174227">
+      <h2>Шар Покоя</h2>
+      <img src="imeges/Sver1.jpg" alt="Money">
+      <div class="price-row">
+  <span class="price">149₽</span>
+ <button class="buy-button">Купить</button>
 </div>
 
     </div>
-  </div>
+    <div class="other-card"
+    data-desc="🌑🌑🌑Шар Тьмы🌑🌑🌑
+При применении во второй руке:
+Даёт эффект Сила 3
+Даёт эффект Скорость 2
+Даёт эффект Огнестойкость 1"
+    data-link="https://funpay.com/lots/offer?id=49173968">
+      <h2>Шар Тьмы</h2>
+      <img src="imeges/Sver2.jpg" alt="Donate case">
+      <div class="price-row">
+  <span class="price">149₽</span>
+   <button class="buy-button">Купить</button>
+</div>
 </section>
+
 
   <!-- Наборы -->
   <section id="packs" class="hidden">
@@ -398,7 +549,7 @@
         <h2>Набор пвп</h2>
         <img src="imeges/kit1.jpg" alt="Pack 1">
         <div class="price-row">
-  <span class="price">68₽</span>
+  <span class="price">129₽</span>
   <a href="https://funpay.com/lots/offer?id=48437599" class="buy-button">Купить</a>
 </div>
 
@@ -407,7 +558,7 @@
         <h2>Набор пвп+</h2>
         <img src="imeges/kit2.jpg" alt="Pack 2">
       <div class="price-row">
-  <span class="price">138₽</span>
+  <span class="price">155₽</span>
   <a href="https://funpay.com/lots/offer?id=48437657" class="buy-button">Купить</a>
 </div>
 
@@ -416,12 +567,13 @@
         <h2>Набор пвп++</h2>
         <img src="imeges/kit3.jpg" alt="Pack 3">
        <div class="price-row">
-  <span class="price">192₽</span>
+  <span class="price">221₽</span>
   <a href="https://funpay.com/lots/offer?id=48437692" class="buy-button">Купить</a>
 </div>
 
       </div>
     </div>
+    
   </section>
 
   <script>
@@ -438,7 +590,7 @@
     }
 
     const hero = document.getElementById('heroSection');
-    const sections = ['privileges', 'other', 'packs'].map(id => document.getElementById(id));
+    const sections = ['privileges', 'other', 'packs', 'Items'].map(id => document.getElementById(id));
 
     // Функция показать товары, скрыть hero
     function showProducts() {
@@ -470,8 +622,179 @@
       e.preventDefault();
       showHero();
     });
+    
   </script>
+<!-- МОДАЛ -->
+ <!-- Оверлей -->
+<div id="overlay" class="hidden"></div>
+
+<div id="privilegeModal" class="hidden" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 45%;
+    max-width: 600px;
+    background-color: rgb(31,46,61);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    z-index: 2000;
+">
+    <h2 id="modalTitle">Выберите срок привилегии</h2>
+    <div style="margin-top:20px; display:flex; justify-content:space-around; flex-wrap: wrap; gap:10px;">
+        <a href="#" id="buy30" class="buy-button">30 дней</a>
+        <a href="#" id="buy90" class="buy-button">90 дней</a>
+        <a href="#" id="buyForever" class="buy-button">Навсегда</a>
+    </div>
+    <button id="closeModal" style="
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4d4d;
+    border:none;
+    padding: 20px 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    color:white;
+    font-weight:bold;
+">Закрыть</button>
+</div>
+
+
+
+
+
+<div id="itemModal" class="hidden" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 600px;
+    background-color: rgb(31,46,61);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    z-index: 2000;
+    color: white;
+">
+    <h2 id="itemTitle">Название товара</h2>
+    <p id="itemDesc" style="margin:20px 0; font-size:16px; line-height:1.4;">
+      Здесь будет описание
+    </p>
+    <a href="#" id="itemBuy" class="buy-button" target="_blank">Перейти к покупке</a>
+    <button id="closeItemModal" style="
+      margin-top: 30px;
+      background: #ff4d4d;
+      border:none;
+      padding: 15px 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      color:white;
+      font-weight:bold;
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+    ">Закрыть</button>
+</div>
+
+<script>
+// ===== Управление скроллом =====
+function disableScroll() {
+  document.body.style.overflow = 'hidden';
+}
+function enableScroll() {
+  document.body.style.overflow = '';
+}
+
+// ===== Оверлей =====
+const overlay = document.getElementById('overlay');
+function showOverlay() {
+  overlay.classList.add('active');
+  overlay.classList.remove('hidden');
+  disableScroll();
+}
+function hideOverlay() {
+  overlay.classList.remove('active');
+  setTimeout(() => overlay.classList.add('hidden'), 300); // плавное скрытие
+  enableScroll();
+}
+
+// ===== Модал привилегий =====
+const modal = document.getElementById('privilegeModal');
+const closeModal = document.getElementById('closeModal');
+
+const buy30 = document.getElementById('buy30');
+const buy90 = document.getElementById('buy90');
+const buyForever = document.getElementById('buyForever');
+
+const privCards = document.querySelectorAll('.priv-card');
+
+privCards.forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    const title = card.querySelector('h2').innerText;
+    modal.querySelector('#modalTitle').innerText = `Выберите срок для ${title}`;
+
+    buy30.href = card.getAttribute('data-link-30');
+    buy90.href = card.getAttribute('data-link-90');
+    buyForever.href = card.getAttribute('data-link-forever');
+
+    modal.classList.remove('hidden');
+    showOverlay();
+  });
+});
+
+closeModal.addEventListener('click', () => {
+  modal.classList.add('hidden');
+  hideOverlay();
+});
+
+// ===== Модал товаров =====
+const itemModal = document.getElementById('itemModal');
+const closeItemModal = document.getElementById('closeItemModal');
+const itemTitle = document.getElementById('itemTitle');
+const itemDesc = document.getElementById('itemDesc');
+const itemBuy = document.getElementById('itemBuy');
+
+const buyButtons = document.querySelectorAll('.other-card .buy-button, .kit-cards .buy-button');
+
+buyButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const card = btn.closest('.other-card, .kit-card');
+
+    itemTitle.innerText = card.querySelector('h2').innerText;
+    itemDesc.innerText = card.getAttribute('data-desc') || "Описание пока отсутствует";
+    itemBuy.href = card.getAttribute('data-link');
+
+    itemModal.classList.remove('hidden');
+    showOverlay();
+  });
+});
+
+closeItemModal.addEventListener('click', () => {
+  itemModal.classList.add('hidden');
+  hideOverlay();
+});
+
+// ===== Закрытие по клику на фон =====
+overlay.addEventListener('click', () => {
+  modal.classList.add('hidden');
+  itemModal.classList.add('hidden');
+  hideOverlay();
+});
+
+// ===== Все buy-button в новой вкладке =====
+document.querySelectorAll('.buy-button').forEach(btn => {
+  btn.setAttribute('target', '_blank');
+});
+</script>
 </body>
 </html>
+
 
 
